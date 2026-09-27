@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atelier — Premium Business Demo</title>
+    <meta name="description" content="A premium digital storefront demo by Mirai.">
+    <style>
+        :root {
+            --bg: #f5f0e8;
+            --ink: #171512;
+            --muted: #70695f;
+            --card: #ebe4d9;
+            --accent: #8f1d2c;
+            --line: rgba(23, 21, 18, .14);
+            --white: #fffaf2;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0
+        }
+
+        html {
+            scroll-behavior: smooth
+        }
+
+        body {
+            font-family: Inter, Arial, sans-serif;
+            background: var(--bg);
+            color: var(--ink);
+            line-height: 1.5
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none
+        }
+
+        .container {
+            width: min(1160px, 92%);
+            margin: auto
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 25px 0
+        }
+
+        .logo {
+            font-family: Georgia, serif;
+            font-size: 25px;
+            letter-spacing: -.5px
+        }
+
+        .navlinks {
+            display: flex;
+            gap: 28px;
+            font-size: 13px;
+            color: var(--muted)
+        }
+
+        .navlinks a:hover {
+            color: var(--ink)
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 13px 21px;
+            border: 1px solid var(--ink);
+            font-size: 13px;
+            transition: .2s
+        }
+
+        .btn.dark {
+            background: var(--ink);
+            color: var(--white)
+        }
+
+        .btn:hover {
+            transform: translateY(-2px)
+        }
+
+        .hero {
+            min-height: 76vh;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+            padding: 55px 0 80px
+        }
+
+        .eyebrow {
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            font-size: 11px;
+            color: var(--accent);
+            font-weight: 700;
+            margin-bottom: 20px
+        }
+
+        h1 {
+            font-family: Georgia, serif;
+            font-size: clamp(54px, 7vw, 92px);
+            line-height: .91;
+            letter-spacing: -4px;
+            font-weight: 500
+        }
+
+        h1 em {
+            color: var(--accent);
+            font-style: normal
+        }
+
+        .hero p {
+            max-width: 470px;
+            color: var(--muted);
+            margin: 27px 0;
+            font-size: 16px
+        }
+
+        .actions {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap
+        }
+
+        .hero-art {
+            height: 590px;
+            background: #d8cbb9;
+            position: relative;
+            overflow: hidden
+        }
+
+        .hero-art .shape {
+            position: absolute;
+            inset: 10% 15%;
+            background: #a9967c;
+            transform: rotate(7deg)
+        }
+
+        .hero-art .shape2 {
+            position: absolute;
+            width: 52%;
+            height: 66%;
+            left: 24%;
+            top: 18%;
+            background: #332e28;
+            transform: rotate(-8deg)
+        }
+
+        .hero-art .label {
+            position: absolute;
+            bottom: 24px;
+            left: 24px;
+            background: var(--white);
+            padding: 13px 16px;
+            font-family: Georgia, serif
+        }
+
+        section {
+            padding: 100px 0;
+            border-top: 1px solid var(--line)
+        }
+
+        .section-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: end;
+            gap: 30px;
+            margin-bottom: 42px
+        }
+
+        h2 {
+            font: 500 clamp(38px, 5vw, 60px)/1 Georgia, serif;
+            letter-spacing: -2px
+        }
+
+        .section-head p {
+            max-width: 420px;
+            color: var(--muted);
+            font-size: 14px
+        }
+
+        .products {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px
+        }
+
+        .product {
+            background: var(--card);
+            padding: 14px
+        }
+
+        .product-img {
+            height: 330px;
+            display: flex;
+            align-items: end;
+            padding: 18px;
+            background: #c7b9a6
+        }
+
+        .product:nth-child(2) .product-img {
+            background: #b6aaa0
+        }
+
+        .product:nth-child(3) .product-img {
+            background: #d0c4b2
+        }
+
+        .product-img span {
+            background: var(--white);
+            padding: 9px 12px;
+            font: 14px Georgia, serif
+        }
+
+        .product-info {
+            display: flex;
+            justify-content: space-between;
+            padding: 17px 3px 4px;
+            font-size: 14px
+        }
+
+        .product-info small {
+            color: var(--muted)
+        }
+
+        .story {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 70px;
+            align-items: center
+        }
+
+        .story-img {
+            height: 520px;
+            background: linear-gradient(135deg, #b9aa96, #463d35)
+        }
+
+        .story p {
+            color: var(--muted);
+            margin: 24px 0;
+            max-width: 500px
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1px;
+            background: var(--line);
+            border: 1px solid var(--line)
+        }
+
+        .feature {
+            background: var(--bg);
+            padding: 35px;
+            min-height: 190px
+        }
+
+        .feature b {
+            font-family: Georgia, serif;
+            font-size: 24px;
+            font-weight: 500
+        }
+
+        .feature p {
+            color: var(--muted);
+            font-size: 13px;
+            margin-top: 13px
+        }
+
+        .cta {
+            background: var(--ink);
+            color: var(--white);
+            padding: 80px 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 40px
+        }
+
+        .cta h2 {
+            max-width: 600px
+        }
+
+        .cta p {
+            color: #c7c0b6;
+            max-width: 380px;
+            margin-top: 15px
+        }
+
+        .cta .btn {
+            border-color: var(--white);
+            background: var(--white);
+            color: var(--ink);
+            margin-top: 22px
+        }
+
+        footer {
+            padding: 35px 0;
+            display: flex;
+            justify-content: space-between;
+            color: var(--muted);
+            font-size: 12px
+        }
+
+        @media(max-width:760px) {
+            .navlinks {
+                display: none
+            }
+
+            .hero,
+            .story {
+                grid-template-columns: 1fr
+            }
+
+            .hero {
+                padding-top: 30px
+            }
+
+            .hero-art {
+                height: 420px
+            }
+
+            .products,
+            .features {
+                grid-template-columns: 1fr
+            }
+
+            .section-head {
+                display: block
+            }
+
+            .section-head p {
+                margin-top: 15px
+            }
+
+            .cta {
+                display: block;
+                padding: 60px 7%
+            }
+
+            footer {
+                display: block
+            }
+
+            footer span {
+                display: block;
+                margin-top: 8px
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <nav>
+            <div class="logo">ATELIER<span style="color:var(--accent)">.</span></div>
+            <div class="navlinks"><a href="#collection">Collection</a><a href="#story">Our Story</a><a
+                    href="#contact">Contact</a></div>
+            <a class="btn dark" href="#contact">Enquire</a>
+        </nav>
+
+        <main>
+            <section class="hero" style="border-top:0">
+                <div>
+                    <div class="eyebrow">A considered collection</div>
+                    <h1>Made to be<br><em>remembered.</em></h1>
+                    <p>A premium digital storefront concept designed to make your products, craftsmanship and story feel
+                        as valuable online as they do in person.</p>
+                    <div class="actions">
+                        <a class="btn dark" href="#collection">Explore collection</a>
+                        <a class="btn" href="#contact">Book a consultation</a>
+                    </div>
+                </div>
+                <div class="hero-art">
+                    <div class="shape"></div>
+                    <div class="shape2"></div>
+                    <div class="label">Signature Collection / 01</div>
+                </div>
+            </section>
+
+            <section id="collection">
+                <div class="section-head">
+                    <h2>Featured<br>collection.</h2>
+                    <p>Replace these cards with the client's real products. Each product can lead directly to WhatsApp,
+                        a product page, an appointment or an enquiry form.</p>
+                </div>
+                <div class="products">
+                    <article class="product">
+                        <div class="product-img"><span>Signature Piece</span></div>
+                        <div class="product-info"><b>Handcrafted No. 01</b><small>₹ 8,500</small></div>
+                    </article>
+                    <article class="product">
+                        <div class="product-img"><span>New Arrival</span></div>
+                        <div class="product-info"><b>Heritage No. 02</b><small>₹ 12,900</small></div>
+                    </article>
+                    <article class="product">
+                        <div class="product-img"><span>Limited</span></div>
+                        <div class="product-info"><b>Edition No. 03</b><small>₹ 15,500</small></div>
+                    </article>
+                </div>
+            </section>
+
+            <section id="story">
+                <div class="story">
+                    <div class="story-img"></div>
+                    <div>
+                        <div class="eyebrow">The story</div>
+                        <h2>Craft deserves a better first impression.</h2>
+                        <p>Your products already have a story. The website should make someone stop scrolling,
+                            understand the value, see the details and know exactly what to do next.</p>
+                        <a class="btn" href="#contact">Discover the brand</a>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <div class="section-head">
+                    <h2>Built around<br>your customer.</h2>
+                    <p>Not just a pretty homepage. The structure is designed around discovery, trust and conversion.</p>
+                </div>
+                <div class="features">
+                    <div class="feature"><b>01 — Discover</b>
+                        <p>Strong visuals and clear categories help visitors find what interests them immediately.</p>
+                    </div>
+                    <div class="feature"><b>02 — Trust</b>
+                        <p>Story, craftsmanship, reviews, location and social proof make the brand feel established.</p>
+                    </div>
+                    <div class="feature"><b>03 — Enquire</b>
+                        <p>Every important page leads naturally toward WhatsApp, booking or a direct enquiry.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="contact">
+                <div class="cta">
+                    <div>
+                        <div class="eyebrow" style="color:#d79aa3">Private enquiries</div>
+                        <h2>Let's create something people remember.</h2>
+                    </div>
+                    <div>
+                        <p>Replace this section with the client's WhatsApp number, phone number, address and social
+                            links.</p><a class="btn" href="https://wa.me/919999999999">Start a conversation</a>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <b>ATELIER.</b><span>Digital experience concept by Mirai — Build What's Next.</span>
+        </footer>
+    </div>
+</body>
+
+</html>
